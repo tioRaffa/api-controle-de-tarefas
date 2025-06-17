@@ -8,7 +8,11 @@ INSTALLED_APPS = [
     
     # Django restframework / JWT
     'rest_framework',
+    'rest_framework.authtoken',
+    'django_extensions',
     # 'rest_framework_simplejwt',
     'django_filters',         
     'drf_spectacular',
+    'djoser',
+    'api',
 ]
