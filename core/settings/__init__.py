@@ -12,3 +12,4 @@ from .templates import *
 
 
 from .api_rest import * # isort:skip
+from .djoser import *
