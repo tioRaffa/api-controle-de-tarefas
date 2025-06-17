@@ -1,7 +1,5 @@
-import os
 from pathlib import Path
-
-from utils.environment import get_env_variable, parse_comma_sep_str_to_list
+from decouple import config, Csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -9,21 +7,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ.get('DEBUG') == '1' else False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS: list[str] = parse_comma_sep_str_to_list(
-    get_env_variable('ALLOWED_HOSTS')
-)
-CSRF_TRUSTED_ORIGINS: list[str] = parse_comma_sep_str_to_list(
-    get_env_variable('CSRF_TRUSTED_ORIGINS')
-)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 
-ROOT_URLCONF = 'project.urls'
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='', cast=Csv())
 
-WSGI_APPLICATION = 'project.wsgi.application'
+ROOT_URLCONF = 'core.urls'
+
+WSGI_APPLICATION = 'core.wsgi.application'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
