@@ -19,3 +19,7 @@ class CommentModel(Base):
         on_delete=models.PROTECT,
         help_text='User qual percente ao comentario'
     )
+
+    def __str__(self):
+        description = f'Comentario de {self.user.username} em {self.issue.title}'
+        return description

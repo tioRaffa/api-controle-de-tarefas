@@ -15,4 +15,7 @@ class ProjectModel(Base):
         help_text="Usuário que gerencia o projeto",
         on_delete=models.CASCADE
         )
+    
+    def __str__(self):
+        return self.title
 

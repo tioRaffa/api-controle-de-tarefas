@@ -43,7 +43,7 @@ class IssueModel(Base):
         blank=False,
         null=False
     )
-    property = models.CharField(
+    priority = models.CharField(
         max_length=20,
         choices=Priority.choices,
         default=Priority.MEDIUM,
@@ -52,3 +52,5 @@ class IssueModel(Base):
         null=False
     )
 
+    def __str__(self):
+        return self.title
