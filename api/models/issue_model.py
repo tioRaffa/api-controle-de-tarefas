@@ -5,12 +5,12 @@ from .project_model import ProjectModel
 
 
 class IssueModel(Base):
-    class Status(models.Choices):
+    class Status(models.TextChoices):
         PENDING = 'PENDENTE', 'Pendente'
         IN_PROGRESS = 'EM_ANDAMENTO', 'Em Andamento'
         DONE = 'CONCLUIDO', 'Concluído'
 
-    class Priority(models.Choices):
+    class Priority(models.TextChoices):
         LOW = 'BAIXA', 'Baixa'
         MEDIUM = 'MEDIA', 'Média'
         HIGH = 'ALTA', 'Alta'
@@ -26,14 +26,16 @@ class IssueModel(Base):
     reporter = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        help_text='usuário que reportou a tarefa'
+        help_text='usuário que reportou a tarefa',
+        related_name='reported_issues'
     )
     assignee = models.ForeignKey(
         User,
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        help_text='suário responsável por resolver a Issue'
+        help_text='suário responsável por resolver a Issue',
+        related_name='assigned_issues',
     )
     status = models.CharField(
         max_length=20,
