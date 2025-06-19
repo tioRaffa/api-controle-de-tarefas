@@ -1,1 +1,3 @@
 from .project_serializer import ProjectSerializer
+from .issue_serializer import IssueSerializer
+from .comment_serializer import CommentSerializer
