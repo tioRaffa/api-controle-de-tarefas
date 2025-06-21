@@ -3,6 +3,7 @@ from api.permission import IsOwnerOrReadOnly
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from .filter import IssueFilter
 
 from api.models import IssueModel
 from api.serializer import IssueSerializer
@@ -16,6 +17,7 @@ class IssueViewSet(viewsets.ModelViewSet):
         IsOwnerOrReadOnly
     ]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_class = IssueFilter
     filterset_fields = [
         'status', 'priority', 'project', 'assignee', 'created_at'
     ]
@@ -28,8 +30,6 @@ class IssueViewSet(viewsets.ModelViewSet):
         serializer.save(reporter=self.request.user)
 
     def get_queryset(self):
-        return (
-            super().get_queryset().select_related(
-                'project', 'reporter', 'assignee'
-                ))
-        
+        qs = super().get_queryset()
+        qs = qs.select_related('project', 'reporter', 'assignee')
+        return qs

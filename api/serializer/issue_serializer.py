@@ -32,8 +32,8 @@ class IssueSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True
     )
-    status = serializers.ChoiceField(choices=IssueModel.Status.choices)
-    priority = serializers.ChoiceField(choices=IssueModel.Priority.choices)
+    status = serializers.ChoiceField(choices=IssueModel.Status.choices, default=IssueModel.Status.PENDING)
+    priority = serializers.ChoiceField(choices=IssueModel.Priority.choices, default=IssueModel.Priority.MEDIUM)
 
     class Meta:
         model = IssueModel

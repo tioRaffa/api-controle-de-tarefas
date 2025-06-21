@@ -42,16 +42,16 @@ class IssueModel(Base):
         choices=Status.choices,
         default=Status.PENDING,
         help_text='Status da Issue',
-        blank=False,
-        null=False
+        blank=True,
+        null=True
     )
     priority = models.CharField(
         max_length=20,
         choices=Priority.choices,
         default=Priority.MEDIUM,
         help_text='Prioridade da Issue',
-        blank=False,
-        null=False
+        blank=True,
+        null=True
     )
 
     def __str__(self):
