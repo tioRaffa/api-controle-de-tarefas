@@ -68,6 +68,19 @@ psycopg2-binary # Se usar PostgreSQL
 pip install -r requirements.txt
 ```
 
+## 📫 Configuração de Email para Desenvolvimento (Mailtrap)
+
+Para evitar o envio de e-mails reais durante o desenvolvimento e teste, este projeto é configurado para usar o [Mailtrap.io](https://mailtrap.io) como um servidor SMTP falso. O Mailtrap captura todos os e-mails enviados pela aplicação (como os de reset de senha) e os exibe em uma caixa de entrada virtual segura, permitindo que você visualize e depure o conteúdo do e-mail sem spammar usuários reais.
+
+### Como Configurar o Mailtrap
+
+1.  **Crie uma Conta Gratuita:** Vá até [mailtrap.io](https://mailtrap.io) e crie uma conta.
+2.  **Encontre suas Credenciais:** No seu painel do Mailtrap, navegue até a sua "Inbox" e encontre a seção "SMTP Settings" ou "Integrations". Selecione "Django" na lista para ver as credenciais já formatadas.
+3.  **Adicione as Credenciais ao seu arquivo `.env`:** Copie os valores fornecidos pelo Mailtrap e adicione-os ao seu arquivo `.env` local. As variáveis necessárias estão listadas na seção de instalação abaixo.
+
+Com isso, qualquer funcionalidade que dispare um e-mail (como o reset de senha do Djoser) terá seu e-mail capturado na sua caixa de entrada do Mailtrap.
+
+
 **5. Configure as Variáveis de Ambiente**
 Crie um arquivo `.env` na raiz do projeto, baseado no exemplo `.env.example`.
 
@@ -107,15 +120,18 @@ A API estará disponível em `http://127.0.0.1:8000/api/v1/`.
 Todos os endpoints requerem autenticação via Token JWT. O token de acesso deve ser enviado no cabeçalho `Authorization`.
 `Authorization: JWT <seu_token_de_acesso>`
 
+
 ### Autenticação (Djoser com JWT)
 
 | Método | URL | Descrição |
 | :--- | :--- | :--- |
 | `POST` | `/api/v1/auth/users/` | Registra um novo usuário. |
-| `POST` | `/api/v1/auth/jwt/create/` | Realiza o login. Retorna um `access` token e um `refresh` token. |
+| `POST` | `/api/v1/auth/jwt/create/` | Realiza o login. Retorna um `access` e `refresh` token. |
 | `POST` | `/api/v1/auth/jwt/refresh/` | Gera um novo `access` token usando um `refresh` token válido. |
 | `POST` | `/api/v1/auth/jwt/verify/` | Verifica se um `access` token ainda é válido. |
 | `GET` | `/api/v1/auth/users/me/` | Retorna os dados do usuário logado. |
+| `POST` | `/api/v1/auth/users/reset_password/` | **(Novo)** Inicia o fluxo de reset de senha. Envia um e-mail para o usuário. |
+| `POST` | `/api/v1/auth/users/reset_password_confirm/` | **(Novo)** Finaliza o fluxo de reset de senha com os dados do e-mail. |
 
 ### Projetos (`/api/v1/projects/`)
 
