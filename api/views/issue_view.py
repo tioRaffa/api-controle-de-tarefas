@@ -22,9 +22,6 @@ class IssueViewSet(viewsets.ModelViewSet):
     ]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = IssueFilter
-    filterset_fields = [
-        'status', 'priority', 'project', 'assignee', 'created_at'
-    ]
     search_fields = ['title', 'description']
     ordering_fields = ['id', 'status', 'priority', 'created_at']
     ordering = ['-id']
