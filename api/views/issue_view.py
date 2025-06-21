@@ -10,6 +10,7 @@ from .filter import IssueFilter
 
 from api.models import IssueModel, CommentModel
 from api.serializer import IssueSerializer, CommentSerializer
+from rest_framework import status
 
 
 class IssueViewSet(viewsets.ModelViewSet):
@@ -45,17 +46,17 @@ class IssueViewSet(viewsets.ModelViewSet):
             comments = issue.comments.all().select_related('user').order_by('-id')
             page = self.paginate_queryset(comments)
             if page is not None:
-                serializier = CommentSerializer(page, many=True, context={'request': request})
-                return self.get_paginated_response(serializier.data)
+                serializer = CommentSerializer(page, many=True, context={'request': request})
+                return self.get_paginated_response(serializer.data)
             
-            serializier = CommentSerializer(comments, many=True, context={'request': request})
-            return Response(serializier.data)
+            serializer = CommentSerializer(comments, many=True, context={'request': request})
+            return Response(serializer.data)
         
         if request.method == 'POST':
             data = request.data.copy()
             data['issue_id'] = issue.pk
 
-            serializier = CommentSerializer(data=data, context={'request':request})
-            serializier.is_valid(raise_exception=True)
-            serializier.save(user=request.user)
-            return Response(serializier.data, status=201)
+            serializer = CommentSerializer(data=data, context={'request':request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
