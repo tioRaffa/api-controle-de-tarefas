@@ -23,5 +23,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'id',
             'body',
             'issue',
+            'issue_id',
             'user'
         ]

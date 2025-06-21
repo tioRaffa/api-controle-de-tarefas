@@ -12,7 +12,8 @@ class CommentModel(Base):
     issue = models.ForeignKey(
         IssueModel,
         on_delete=models.CASCADE,
-        help_text='Issue qual percente ao comentario'
+        help_text='Issue qual percente ao comentario',
+        related_name='comments'
     )
     user = models.ForeignKey(
         User,
