@@ -32,6 +32,8 @@ class IssueSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True
     )
+    status = serializers.ChoiceField(choices=IssueModel.Status.choices)
+    priority = serializers.ChoiceField(choices=IssueModel.Priority.choices)
 
     class Meta:
         model = IssueModel
@@ -46,6 +48,7 @@ class IssueSerializer(serializers.ModelSerializer):
             'assignee_id',
             'status',
             'priority',
+            'created_at'
         ]
 
     def validate(self, data):

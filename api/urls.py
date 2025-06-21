@@ -2,15 +2,10 @@ from django.urls import path
 from rest_framework.routers import SimpleRouter
 from api import views
 
-router_projects = SimpleRouter()
-router_projects.register(
-    'projects',
-    views.ProjectListApiView,
-    basename='projects-api'
-)
+router = SimpleRouter()
+router.register('projects', views.ProjectListApiView, basename='project-api')
+router.register('issues', views.IssueViewSet, basename='issues-api')
 
-urlpatterns = [
-    
-]
 
-urlpatterns += router_projects.urls
+urlpatterns = []
+urlpatterns += router.urls
