@@ -1,9 +1,3 @@
-Com certeza\! Com base em toda a evolução do seu projeto, preparei um `README.md` detalhado e profissional. Ele foi pensado para impressionar: claro para recrutadores, completo para outros desenvolvedores e um ótimo resumo das suas habilidades.
-
-Você pode copiar e colar o conteúdo abaixo diretamente em um arquivo chamado `README.md` na raiz do seu projeto no GitHub.
-
------
-
 # API de Gerenciamento de Projetos e Tarefas
 
 ## 📖 Sobre o Projeto
