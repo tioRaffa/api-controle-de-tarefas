@@ -91,6 +91,14 @@ DEBUG=True
 DATABASE_URL='sqlite:///db.sqlite3'
 # Exemplo para PostgreSQL:
 # DATABASE_URL='postgres://user:password@host:port/dbname'
+
+Configuração de Email com Mailtrap para Desenvolvimento
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.mailtrap.io
+EMAIL_PORT=2525
+EMAIL_HOST_USER=your_mailtrap_user_here
+EMAIL_HOST_PASSWORD=your_mailtrap_password_here
+EMAIL_USE_TLS=True
 ```
 
 **6. Aplique as Migrações do Banco de Dados**
